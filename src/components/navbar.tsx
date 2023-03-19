@@ -25,6 +25,10 @@ export const Navibar = () => {
                         <Nav.Link href='/main'>Main</Nav.Link>
                         }
                         {
+                        user &&
+                        <Nav.Link href='/createpost'>Create Post</Nav.Link>
+                        }
+                        {
                         !user &&
                         <Nav.Link href='/login'>Login</Nav.Link>
                         }

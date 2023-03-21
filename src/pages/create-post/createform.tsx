@@ -6,6 +6,7 @@ import { auth, db } from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow, MDBTextArea } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 interface CreateFormData {
     title: string,
@@ -37,6 +38,7 @@ export const CreateForm = () => {
             ...data,
             username: user?.displayName,
             userId: user?.uid,
+            date: moment().format('YYYYMMDD') + ' ' +moment().format('hh:mm a'),
         });
         navigate('/main');
     }

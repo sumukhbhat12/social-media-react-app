@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { Navibar } from './components/navbar';
@@ -8,10 +7,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { CreatePost } from './pages/create-post/createpost';
+import background from "./resources/SocialMediaBackground.png";
+
+const styles = {
+  header: {
+    backgroundImage: `url(${background})`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
+  },
+
+  content: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  }
+}
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={styles.header}>
+      <div style={styles.content}>
       <Router>
         <Navibar/>
         <Routes>
@@ -22,7 +39,7 @@ function App() {
           <Route path='*' element={ <h3 className='text-center'>Error 404, Page Not Found!</h3> } />
         </Routes>
       </Router>
-      
+      </div>
     </div>
   );
 }

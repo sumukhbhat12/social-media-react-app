@@ -3,7 +3,7 @@ import { getDocs, collection } from 'firebase/firestore';
 import { db } from "../../config/firebase";
 import { useState, useEffect } from "react";
 import { Post } from "./post";
-import moment from "moment";
+import { Col, Row } from "react-bootstrap";
 
 export interface Posts {
     id: string,
@@ -12,6 +12,7 @@ export interface Posts {
     username: string,
     description: string,
     date: string,
+    image: string,
 }
 
 export const Main = () => {
@@ -27,23 +28,23 @@ export const Main = () => {
 
     useEffect(() => {
         getPosts();
-        const sortedPostsList = postsList?.sort((a, b) => {
-            return (moment(moment(a.date).format('YYYYMMDD hh:mm a')).unix() - moment(moment(b.date).format('YYYYMMDD hh:mm a')).unix());
-        });
-        postsList?.map((post) => console.log(moment(moment(post.date).format('YYYYMMDD hh:mm a')).unix()));
-        //sortedPostsList?.map((post) => console.log(post));
-        //setPostsList(postsList);
     },[]);
 
     
     return(
             <Container className="">
-                <h1 className="text-center mt-3">Main Page</h1>
+                <Row>
+                    <Col></Col>
+                    <Col xs={10}>
+                <h1 className="text-center mt-3" id="mainpagetext">Main Page</h1>
                 <>{
                     postsList?.map((post:Posts) => {
                         return <Post key={post.id} post={post} />
                     })
                 }</>
+                </Col>
+                <Col></Col>
+                </Row>
             </Container>
     )
 }

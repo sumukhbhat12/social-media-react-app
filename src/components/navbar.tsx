@@ -1,4 +1,4 @@
-import { Link,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Container from 'react-bootstrap/Container';
@@ -37,7 +37,7 @@ export const Navibar = () => {
                     <div className='d-flex mt-3'>
                         <p style={{marginRight:'10px', fontSize:'17px'}}> {user?.displayName} </p>
                         <img src={ user?.photoURL || ''} width='30' height='30' className='rounded-circle' />
-                        <button className='rounded-pill' style={{width:'70px', height:'30px', marginLeft:'10px'}} onClick={signUserOut}>Signout</button>
+                        <button className='rounded-9 border-1' style={{width:'70px', height:'30px', marginLeft:'10px'}} onClick={signUserOut}>Signout</button>
                     </div>
                     }
             </Container>

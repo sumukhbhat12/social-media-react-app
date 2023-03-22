@@ -38,7 +38,7 @@ export const Main = () => {
     
     return(
             <Container className="">
-                <h1>Main Page</h1>
+                <h1 className="text-center mt-3">Main Page</h1>
                 <>{
                     postsList?.map((post:Posts) => {
                         return <Post key={post.id} post={post} />

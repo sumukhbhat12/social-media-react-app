@@ -7,10 +7,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { storage } from '../../config/firebase';
 import { ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
+import { ContainerProps } from 'react-bootstrap';
 
 interface CreateFormData {
     title: string,
@@ -59,23 +60,17 @@ export const CreateForm = () => {
         navigate('/main');
     }
 
-    // const uploadImage = () => {
-    //     if(imageUpload == null){
-    //         return;
-    //     }
-    //     const imageRef = ref(storage, `posts/${imageUpload.name + v4()}`);
-    //     uploadBytes(imageRef, imageUpload).then(() => {
-    //         alert('Image Uploaded!');
-    //     })
-    // }
-
     return(
-        <MDBContainer fluid>
-            <MDBCard className='text-black m-5' style={{borderRadius: '25px'}}>
+        <MDBContainer style={{height:'100vh', width:'100vw'}} className='justify-content-center align-items-center'>
+            <MDBRow>
+            <MDBCol></MDBCol>
+            <MDBCol lg={10} md={10} sm={8} xs={4}>
+            <MDBCard className='text-black' style={{borderRadius: '25px'}}>
                 <MDBCardBody>
-                    <MDBRow>
-                        <MDBCol md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
-                        <p className="text-center h4 fw-bold mb-3 mx-1 mx-md-4 mt-4">New Post</p>
+                <p className="text-center h4 fw-bold mb-3 mx-1 mx-md-4 mt-4">New Post</p>
+                    <MDBRow className='justify-content-center'>
+                        <MDBCol md='10' lg='6' className='order-2 order-md-2 order-lg-1'>
+                        
                             <form onSubmit={handleSubmit(onCreatePost)}>
                                 <div className='d-flex flex-row align-items-center mb-4'>
                                     <MDBIcon fas icon="pencil-alt" className='m-3' size='lg' />
@@ -90,15 +85,20 @@ export const CreateForm = () => {
                                 <div className='justify-content-center mb-4 '>
                                     <input type='file' onChange={(event) => { if(event.target.files) setImageUpload(event.target.files[0])} }/>
                                 </div>
+                                <div className='text-center'>
                                 <input type='submit'className='rounded-9 border-1'/>
+                                </div>
                             </form>
                         </MDBCol>
-                        <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
+                        <MDBCol md='10' lg='6' className='order-1 order-md-1 order-lg-2'>
                             <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp' fluid/>
                         </MDBCol>
                     </MDBRow>
                 </MDBCardBody>
             </MDBCard>
+            </MDBCol>
+            <MDBCol></MDBCol>
+            </MDBRow>
         </MDBContainer>
     )
 }

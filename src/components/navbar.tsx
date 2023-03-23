@@ -29,13 +29,17 @@ export const Navibar = () => {
                         <Nav.Link href='/createpost'>Create Post</Nav.Link>
                         }
                         {
+                        user &&
+                        <Nav.Link href='/profile'>Profile</Nav.Link>
+                        }
+                        {
                         !user &&
                         <Nav.Link href='/login'>Login</Nav.Link>
                         }
                     </Nav>
                     {user &&
                     <div className='d-flex mt-3'>
-                        <p style={{marginRight:'10px', fontSize:'17px'}}> {user?.displayName} </p>
+                        <p style={{marginRight:'10px', fontSize:'17px'}} > {user?.displayName} </p>
                         <img src={ user?.photoURL || ''} width='30' height='30' className='rounded-circle' />
                         <button className='rounded-9 border-1' style={{width:'70px', height:'30px', marginLeft:'10px'}} onClick={signUserOut}>Signout</button>
                     </div>

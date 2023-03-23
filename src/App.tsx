@@ -8,6 +8,7 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { CreatePost } from './pages/create-post/createpost';
 import background from "./resources/SocialMediaBackground.png";
+import { Profile } from './pages/profile';
 
 const styles = {
   header: {
@@ -19,26 +20,29 @@ const styles = {
   },
 
   content: {
-    height: '100%',
-    width: '100%',
+    // height: '100%',
+    // width: '100%',
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
   }
 }
 
 function App() {
   return (
-    <div className="App" style={styles.header}>
+    <div style={styles.header}>
       <div style={styles.content}>
-      <Router>
-        <Navibar/>
-        <Routes>
-          <Route path='/' element={ <Login /> } />
-          <Route path='/main' element={<Main /> } />
-          <Route path='/login' element={ <Login /> } />
-          <Route path='/createpost' element={ <CreatePost /> } />
-          <Route path='*' element={ <h3 className='text-center'>Error 404, Page Not Found!</h3> } />
-        </Routes>
-      </Router>
+        <div className="App" >
+          <Router>
+            <Navibar/>
+            <Routes>
+              <Route path='/' element={ <Login /> } />
+              <Route path='/main' element={<Main /> } />
+              {/* <Route path='/login' element={ <Login /> } /> */}
+              <Route path='/createpost' element={ <CreatePost /> } />
+              <Route path='/profile' element={ <Profile /> } />
+              <Route path='*' element={ <h3 className='text-center'>Error 404, Page Not Found!</h3> } />
+            </Routes>
+          </Router>
+        </div>
       </div>
     </div>
   );

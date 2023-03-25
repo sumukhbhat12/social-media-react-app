@@ -6,8 +6,9 @@ import { auth, db, storage } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
+import { Comments } from "./comments/comments";
 
-interface Props {
+export interface Props {
     post: Posts,
 }
 
@@ -20,13 +21,16 @@ export const Post = (props: Props) => {
     const [ user ] = useAuthState(auth);
     const [ likes , setLikes ] = useState<Likes[] | null>(null);
     const [ imageUrl, setImageUrl] = useState<string>('');
+    const [ showComment, setShowComment ] = useState(false);
 
     const hasUserLiked = likes?.find((like) => {
         return like.userId === user?.uid;
     })
 
+    //reference to all the docs in likes collection
     const likesRef = collection(db, "likes");
 
+    //reference to the docs in the likes collection where postId == post.id i.e after filtering...
     const likesDoc = query(likesRef, where('postId','==',post.id));
 
     const getLikes = async () => {
@@ -41,6 +45,7 @@ export const Post = (props: Props) => {
                 postId: post.id,
             });
     
+            //to update the likes count immediately without needing to refresh the page
             if (user) {
                 setLikes((prev) => prev ? [...prev, {userId: user?.uid}] : [{userId: user?.uid}]);
             }
@@ -110,8 +115,12 @@ export const Post = (props: Props) => {
                 
                 <button className="rounded-7 border-1 me-2" onClick={ hasUserLiked ? removeLike : addLike}> { hasUserLiked? <>&#128078;</> : <>&#128077;</> }</button>
                 { likes?.length && <p> { likes?.length } Likes </p>}
-                    
+
+                <button onClick={ () => setShowComment(!showComment) } className="ms-5 rounded-9 border-1" style={{width:'35px'}}>&#128488;</button> {  }
             </Card.Footer>
+            {
+                showComment && <Comments post={post} />
+            }
         </Card>
     )
 }
